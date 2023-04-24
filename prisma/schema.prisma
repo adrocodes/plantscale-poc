@@ -1,11 +1,37 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model UserMeta {
+  id          Int         @id @default(autoincrement())
+  auth_id     String
+  customer_id String
+  event       Event[]
+  eventTeam   EventTeam[]
+}
+
+model Event {
+  id         Int         @id @default(autoincrement())
+  userMetaId Int
+  userMeta   UserMeta    @relation(fields: [userMetaId], references: [id])
+  eventTeam  EventTeam[]
+
+  @@index([userMetaId])
+}
+
+model EventTeam {
+  id         Int      @id @default(autoincrement())
+  eventId    Int?
+  event      Event?   @relation(fields: [eventId], references: [id])
+  userMetaId Int
+  userMeta   UserMeta @relation(fields: [userMetaId], references: [id])
+
+  @@index([eventId])
+  @@index([userMetaId])
 }
