@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={`${font.className} m-4`}>{children}</body>
     </html>
   );
 }
