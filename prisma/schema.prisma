@@ -21,6 +21,7 @@ model Event {
   userMetaId Int
   userMeta   UserMeta    @relation(fields: [userMetaId], references: [id])
   eventTeam  EventTeam[]
+  name       String
 
   @@index([userMetaId])
 }
@@ -31,6 +32,7 @@ model EventTeam {
   event      Event?   @relation(fields: [eventId], references: [id])
   userMetaId Int
   userMeta   UserMeta @relation(fields: [userMetaId], references: [id])
+  name       String
 
   @@index([eventId])
   @@index([userMetaId])
