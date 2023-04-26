@@ -6,7 +6,7 @@ export const EventIndividualForm = ({ id }: { id: string }) => {
         Name
       </label>
       <input type="text" name="eif-name" required />
-      <input hidden value={id} required name="eif-user-id" />
+      <input hidden defaultValue={id} required name="eif-user-id" />
       <button type="submit" className="px-5 py-3 bg-blue-700 text-white mt-3">
         Create
       </button>

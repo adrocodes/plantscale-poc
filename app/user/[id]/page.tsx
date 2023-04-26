@@ -26,7 +26,8 @@ export default async function Page({ params }: { params: { id: string } }) {
       <h1 className="text-2xl font-bold mb-6">User page: {user.id}</h1>
       <div className="grid grid-cols-2">
         <EventIndividualForm id={params.id} />
-        <EventTeamForm />
+        {/* @ts-ignore */}
+        <EventTeamForm id={params.id} />
       </div>
       <hr className="my-8" />
       <h2 className="text-xl font-bold mb-6">User events: {events.length}</h2>
