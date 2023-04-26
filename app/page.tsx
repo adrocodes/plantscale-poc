@@ -5,6 +5,8 @@ import { prisma } from "../src/prisma";
 export default async function Home() {
   const users = await prisma.userMeta.findMany({ take: 2 });
 
+  await prisma.$disconnect();
+
   return (
     <main>
       {users.map((value) => (
