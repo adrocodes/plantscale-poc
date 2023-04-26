@@ -24,22 +24,19 @@ export async function POST(request: NextRequest) {
         },
       },
       eventTeam: {
-        ...(teamId
-          ? {
+        connectOrCreate: {
+          where: {
+            id: Number(teamId),
+          },
+          create: {
+            name: team || "UNKNOWN",
+            userMeta: {
               connect: {
-                id: Number(teamId),
+                id: Number(id),
               },
-            }
-          : {
-              create: {
-                name: team || "UNKOWN",
-                userMeta: {
-                  connect: {
-                    id: Number(id),
-                  },
-                },
-              },
-            }),
+            },
+          },
+        },
       },
     },
   });
