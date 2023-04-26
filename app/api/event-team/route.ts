@@ -9,7 +9,11 @@ export async function POST(request: NextRequest) {
   const teamId = data.get("etf-existing-team")?.toString();
   const id = data.get("etf-user-id")!.toString();
 
-  console.log({ name, team, teamId, id });
+  if (!team && !teamId) {
+    return new Response("Need team information", {
+      status: 400,
+    });
+  }
 
   await prisma.event.create({
     data: {
